@@ -1,0 +1,21 @@
+{
+  "name": "WebRTCPeer",
+  "version": "1.0.0",
+  "description": "A convenience wrapper to make it less painful to use the WebRTC API.  Currently, only DataChannels are supported.",
+  "main": "WebRTCPeer.js",
+  "repository": {
+    "type": "git",
+    "url": "git://git.iheartryan.com/WebRTCPeer"
+  },
+  "keywords": [
+    "webrtc",
+    "p2p",
+    "peer"
+  ],
+  "author": "Ryan Hughes <ryan@iheartryan.com>",
+  "license": "LGPL",
+  "homepage": "http://iheartryan.com",
+  "dependencies": {
+    "wrtc": ">=0.0.29"
+  }
+}
