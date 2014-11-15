@@ -328,6 +328,12 @@ WebRTCPeer.prototype.send = function (label, message) {
 WebRTCPeer.prototype._iceXferReady = function () {
   var peer = this;
   var ready = true;
+
+  // If they didn't register any callbacks, we'll assume we're good to go.
+  if (this.iceXferReadyCallbacks.length == 0) {
+    return true;
+  }
+
   this.iceXferReadyCallbacks.every(function (cb) {
     ready = cb(peer);
     return ready;
