@@ -702,6 +702,13 @@ WebRTCPeer.prototype.addSendAnswerHandler = function (handler) {
   this.sendAnswerHandlers.push(handler);
 };
 
+WebRTCPeer.prototype.close = function () {
+  var labels = Object.keys(this.dataChannels);
+  for (var i=0; i<labels.length; i++) {
+    this.dataChannels[labels[i]].close();
+  }
+};
+
 if (typeof module != "undefined" || typeof exports != "undefined") {
   module.exports = exports = WebRTCPeer;
 }
