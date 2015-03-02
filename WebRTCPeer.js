@@ -455,10 +455,7 @@ WebRTCPeer.prototype._doSendOffer = function (offer) {
     peer.pc.addIceCandidate(new peer.RTCIceCandidate(candidate.sdp));
   });
 
-  var offerObj = {
-    'type': offer.type,
-    'sdp': offer.sdp,
-  };
+  var offerObj = offer;
 
   this.sendOfferHandlers.forEach(function (handler) {
     handler(peer, offerObj);
