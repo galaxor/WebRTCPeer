@@ -1,3 +1,11 @@
+var debugging = false;
+
+function dlog(msg) {
+  if (debugging) {
+    console.log(msg);
+  }
+}
+
 if (typeof require == "function") {
   // If we've been called from nodejs, then 'require' will be a function, and
   // we can/have to require the wrtc module.
@@ -467,7 +475,7 @@ WebRTCPeer.prototype.addSendOfferHandler = function (handler) {
 };
 
 WebRTCPeer.prototype._doWaitforDataChannels = function () {
-  console.log('awaiting data channels');
+  dlog('awaiting data channels');
 };
 
 WebRTCPeer.prototype._dataChannelOpen = function (channel) {
@@ -475,7 +483,7 @@ WebRTCPeer.prototype._dataChannelOpen = function (channel) {
   var label = channel.label;
   var labels = Object.keys(this.expectedDataChannels);
 
-  console.info('onopen');
+  dlog('onopen');
   peer.dataChannels[label] = channel;
   delete peer.pendingDataChannels[label];
   if (labels.length > 0 && Object.keys(peer.dataChannels).length === labels.length) {
@@ -511,14 +519,14 @@ WebRTCPeer.prototype._dataChannelMessage = function (channel, evt) {
 WebRTCPeer.prototype._doCreateDataChannelCallback = function () {
   var labels = Object.keys(this.expectedDataChannels);
 
-  console.log("Handling data channels");
+  dlog("Handling data channels");
 
   var peer = this;
 
   this.pc.ondatachannel = function(evt) {
     var channel = evt.channel;
 
-    console.log('ondatachannel', channel.label, channel.readyState);
+    dlog('ondatachannel', channel.label, channel.readyState);
     var label = channel.label;
 
     // Reject the dataChannel if we were not expecting it.
@@ -659,7 +667,7 @@ WebRTCPeer.prototype._xferIceCandidate = function (candidate) {
 
 WebRTCPeer.prototype._doAllDataChannelsOpen = function () {
   var peer = this;
-  console.log('complete');
+  dlog('complete');
   this.dataChannelsOpenCallbacks.forEach(function (cb) {
     cb(peer.dataChannels);
   });
